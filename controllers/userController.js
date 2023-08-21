@@ -9,7 +9,6 @@ const jwt = require("jsonwebtoken");
 
 const registerUser = asyncHandler(async(req, res) => {
     const {userName, email, password, role} = req.body;
-    type = role.toLowerCase();
     if(type === 'admin' || type === 'teacher' || type === 'student'){
         if(!userName || !email || !password) {
             res.status(400);
@@ -30,7 +29,7 @@ const registerUser = asyncHandler(async(req, res) => {
             userName,
             email,
             password : hashedPassword,
-            role : type,
+            role,
         });
         console.log(`User created ${user}`);
         if(user){
